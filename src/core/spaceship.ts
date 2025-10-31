@@ -1,12 +1,14 @@
 
+import type { Scene } from "three";
 import { GLTFLoader, type GLTF } from "three/examples/jsm/Addons.js";
 
 export class spaceship {
 
-    gltfLoader = new GLTFLoader
+  scene: Scene   
+  gltfLoader = new GLTFLoader()
 
     
-    constructor() {}
+    constructor(scene: Scene) {}
 
    // this.loadModel();
      //subir el modelo 3d
