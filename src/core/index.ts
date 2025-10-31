@@ -6,6 +6,7 @@ import {
   DirectionalLight,
 } from "three";
 import { GLTFLoader, type GLTF } from "three/examples/jsm/Addons.js";
+import { Spaceship } from "./spaceship";
 
 
 export class App {
@@ -21,21 +22,30 @@ export class App {
   ); //camara para ver los elemntos de lapag
   gltfLoader = new GLTFLoader(); //para importar el archivo 3d
 
+  spaceship = new Spaceship(this.scene)
   constructor() {
+
+    ///luces
+    this.createLight();
+    this.config();
+    this.animate();
+    this.createInstance();
+    // funcion que da animacion a todo la pagina usando el motor de render con el metodo de renderizar dentro de la scena y usando para camra
+  }
+  private createInstance(){
+    this.spaceship.loadModel()
+  }
+
+
+   config(){
     //setteo de la dimension del canvas
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     // setteo posicion de la camara
     this.perspectiveCamera.position.set(0, 8, -10);
     // setteo anchor point camara
     this.perspectiveCamera.lookAt(0, 0, 0);
+   }
 
-   
-///luces
-    this.createLight();
-    
-    this.animate();
-    // funcion que da animacion a todo la pagina usando el motor de render con el metodo de renderizar dentro de la scena y usando para camra
-  }
   animate() {
     this.renderer.render(this.scene, this.perspectiveCamera);
     requestAnimationFrame(this.animate.bind(this)); // aqui bind the .this metod a mi funciton de animation
